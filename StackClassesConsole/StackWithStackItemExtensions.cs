@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace StackClassesConsole
 {
-    public static class StackExtensions
+    public static class StackWithStackItemExtensions
     {
-        public static void Merge(this Stack s1, Stack s2)
+        public static void Merge(this StackWithStackItem s1, StackWithStackItem s2)
         {
             if (s2 != null)
             {

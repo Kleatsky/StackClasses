@@ -7,19 +7,38 @@ using System.Threading.Tasks;
 
 namespace StackClassesConsole
 {
-    public class Stack
+    public class StackWithStackItem
     {
-        private List<string> stack;
-        public int Size => stack.Count;
-        public Stack(params string[] items)
+        private class StackItem
         {
-            if(items == null)
+            public string Item;
+            public StackItem PreviousStackItem;
+            public StackItem(string item, StackItem previousStackItem)
             {
-                stack = new List<string>();
+                Item = item;
+                PreviousStackItem = previousStackItem;
+            }
+        }
+        private StackItem stack;
+        private int size;
+        public int Size => size;
+
+        public StackWithStackItem(params string[] items)
+        {
+            if (items == null || items.Length == 0)
+            {
+                size = 0;
+                stack = null;
             }
             else
             {
-                stack = new List<string>(items);
+                size = 1;
+                stack = new StackItem(items[0], null);
+                for (int i = 1; i < items.Length; i++)
+                {
+                    stack = new StackItem(items[i], stack);
+                    size++;
+                }
             }
         }
         public bool Add(string item)
@@ -28,7 +47,8 @@ namespace StackClassesConsole
             {
                 if (!string.IsNullOrEmpty(item))
                 {
-                    stack.Add(item);
+                    stack = new StackItem(item, stack);
+                    size++;
                     return true;
                 }
                 else
@@ -44,14 +64,15 @@ namespace StackClassesConsole
         }
         public string Pop()
         {
-            if (stack.Count == 0 || stack == null)
+            if (size == 0 || stack == null)
             {
                 throw new Exception("Стек пустой");
             }
             try
             {
-                string tempString = stack.Last();
-                stack.RemoveAt(stack.Count - 1);
+                string tempString = stack.Item;
+                stack = stack.PreviousStackItem;
+                size--;
                 return tempString;
             }
             catch (Exception ex)
@@ -62,18 +83,18 @@ namespace StackClassesConsole
         }
         public string Top()
         {
-            if(stack.Count == 0 || stack == null)
+            if (size == 0 || stack == null)
             {
                 return null;
             }
             else
             {
-                return stack.Last();
+                return stack.Item;
             }
         }
-        public static Stack Concat(params Stack[] stacks)
+        public static StackWithStackItem Concat(params StackWithStackItem[] stacks)
         {
-            Stack returnStack = new Stack();
+            StackWithStackItem returnStack = new StackWithStackItem();
             if (stacks == null || stacks.Length == 0) return null;
             else
             {
@@ -89,17 +110,19 @@ namespace StackClassesConsole
                     }
                 }
                 return returnStack;
-            }   
+            }
         }
         public void ShowAllElements()
         {
-            if(!( stack.Count == 0 || stack == null))
+            if (!(size == 0 || stack == null))
             {
+                StackItem previousStackItem = stack;
                 int count = 0;
-                foreach (var item in stack)
+                while (previousStackItem != null)
                 {
-                    Console.Write(count + ": " + item + ", ");
+                    Console.Write(count + ": " + previousStackItem.Item + ", ");
                     count++;
+                    previousStackItem = previousStackItem.PreviousStackItem;
                 }
                 Console.WriteLine();
             }
