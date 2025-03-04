@@ -38,7 +38,7 @@
 
             Console.WriteLine();
 
-            Stack.Concat(new Stack("a", "b", "c"), new Stack("1", "2", "3"), new Stack("А", "Б", "В")).ShowAllElements();
+            Stack.Concat(new Stack("a", "b", "c"), new Stack("1", "2", "3"), new Stack("А", "Б", "В")).ShowAllElements(); // Concat check
 
             Console.WriteLine("Hello, World!");
         }

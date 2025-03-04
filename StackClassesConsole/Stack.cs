@@ -67,28 +67,35 @@ namespace StackClassesConsole
         public static Stack Concat(params Stack[] stacks)
         {
             Stack returnStack = new Stack();
-            foreach (var item in stacks)
+            if (stacks == null || stacks.Length == 0) return null;
+            else
             {
-                try
+                foreach (var item in stacks)
                 {
-                    returnStack.Merge(item);
+                    try
+                    {
+                        returnStack.Merge(item);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-            return returnStack;
+                return returnStack;
+            }   
         }
         public void ShowAllElements()
         {
-            int count = 0;
-            foreach (var item in stack)
+            if(!( stack.Count == 0 || stack == null))
             {
-                Console.Write(count + ": " + item + ", ");
-                count++;
+                int count = 0;
+                foreach (var item in stack)
+                {
+                    Console.Write(count + ": " + item + ", ");
+                    count++;
+                }
+                Console.WriteLine();
             }
-            Console.WriteLine();
         }
     }
 }
