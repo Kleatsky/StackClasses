@@ -9,7 +9,7 @@ namespace StackClassesConsole
 {
     public class Stack
     {
-        public List<string> stack;
+        private List<string> stack;
         public int Size => stack.Count;
         public Stack(params string[] items)
         {
@@ -35,7 +35,7 @@ namespace StackClassesConsole
                 return false;
             }
         }
-        public string Put()
+        public string Pop()
         {
             if (stack.Count == 0 || stack == null)
             {
