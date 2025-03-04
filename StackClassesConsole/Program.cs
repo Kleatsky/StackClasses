@@ -36,7 +36,9 @@
             stackmerge2.Merge(stackmerge1); // Merge for null check
             stackmerge2.ShowAllElements();
 
+            Console.WriteLine();
 
+            Stack.Concat(new Stack("a", "b", "c"), new Stack("1", "2", "3"), new Stack("А", "Б", "В")).ShowAllElements();
 
             Console.WriteLine("Hello, World!");
         }

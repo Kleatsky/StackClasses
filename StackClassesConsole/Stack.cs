@@ -64,14 +64,31 @@ namespace StackClassesConsole
                 return stack.Last();
             }
         }
+        public static Stack Concat(params Stack[] stacks)
+        {
+            Stack returnStack = new Stack();
+            foreach (var item in stacks)
+            {
+                try
+                {
+                    returnStack.Merge(item);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return returnStack;
+        }
         public void ShowAllElements()
         {
             int count = 0;
             foreach (var item in stack)
             {
-                Console.WriteLine(count + ": " + item);
+                Console.Write(count + ": " + item + ", ");
                 count++;
             }
+            Console.WriteLine();
         }
     }
 }
