@@ -74,7 +74,7 @@ namespace StackClassesConsole
         public static Stack Concat(params Stack[] stacks)
         {
             Stack returnStack = new Stack();
-            if (stacks == null || stacks.Length == 0) return null;
+            if (stacks == null || stacks.Length == 0) return returnStack;
             else
             {
                 foreach (var item in stacks)

@@ -95,7 +95,7 @@ namespace StackClassesConsole
         public static StackWithStackItem Concat(params StackWithStackItem[] stacks)
         {
             StackWithStackItem returnStack = new StackWithStackItem();
-            if (stacks == null || stacks.Length == 0) return null;
+            if (stacks == null || stacks.Length == 0) return returnStack;
             else
             {
                 foreach (var item in stacks)
